@@ -1,6 +1,7 @@
 var button = document.getElementById("generate");
 var input1 = document.getElementById("numberofletters");
 var div = document.getElementById("div");
+
 button.addEventListener("click", function (e) {
   div.innerHTML = "";
   if (input1.value < 1 || input1.value > 26) {
