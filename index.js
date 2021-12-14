@@ -23,7 +23,7 @@ div.addEventListener("click", function (e) {
     var img = document.createElement("img");
     img.src = "Pics/" + e.target.innerHTML + ".jpg";
     document.getElementById("pic_div").appendChild(img);
-  } else alert("ma tzbot nfsk yaad");
+  }
 });
 
 function randomUniqueNum(range, outputCount) {
