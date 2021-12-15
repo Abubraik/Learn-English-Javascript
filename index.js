@@ -3,13 +3,13 @@ var input1 = document.getElementById("numberofletters");
 var div = document.getElementById("div");
 
 //load event
-window.addEventListener('load',function(){
-  new Interactions('load','load',getTime());
+window.addEventListener("load", function () {
+  new Interactions("load", "document", getTime());
 });
 
 //unload event
-window.addEventListener('unload',function(){
-  new Interactions('unload','unload',getTime());
+window.addEventListener("unload", function () {
+  new Interactions("unload", "document", getTime());
 });
 
 //Generate button event
@@ -23,10 +23,9 @@ button.addEventListener("click", function (e) {
     var list = randomUniqueNum(value);
     for (let i = 0; i < list.length; i++) {
       var chr = String.fromCharCode(64 + list[i]);
-      div.innerHTML +=
-        `<button type = button id =${chr}>${chr}</button> `;
+      div.innerHTML += `<button type = button id =${chr}>${chr}</button> `;
     }
-    new Interactions("click","Generate",getTime());
+    new Interactions("click", "Generate", getTime());
   }
 });
 
@@ -38,7 +37,7 @@ div.addEventListener("click", function (e) {
     var img = document.createElement("img");
     img.src = `Pics/${e.target.innerHTML}.jpg`;
     document.getElementById("pic_div").appendChild(img);
-    new Interactions('click',e.target.innerHTML,getTime());
+    new Interactions("click", e.target.innerHTML, getTime());
   }
 });
 
@@ -62,21 +61,22 @@ function randomUniqueNum(outputCount) {
 }
 
 //Store interactions in Localstorage
-function Interactions(event_type,event_target,event_time){
+function Interactions(event_type, event_target, event_time) {
   this.event_type = event_type;
-  this.event_target=event_target;
-  this.event_time=event_time;
-  
-  this.display=function(){
+  this.event_target = event_target;
+  this.event_time = event_time;
+
+  this.display = function () {
     return `${this.event_type} ${this.event_time}`;
-  }
-  localStorage[this.display()]=this.event_target;
+  };
+  localStorage[this.display()] = this.event_target;
 }
 
 //Get time function
-function getTime(){
-  var today =new Date();
-  let current_time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+function getTime() {
+  var today = new Date();
+  let current_time =
+    today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
   return current_time;
 }
 /*for(var i=0, len=localStorage.length; i<len; i++) {
