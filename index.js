@@ -71,12 +71,10 @@ function Interactions(event_type, event_target, event_time) {
   };
   localStorage[this.display()] = this.event_target;
 }
-
 //Get time function
 function getTime() {
   var today = new Date();
-  let current_time =
-    today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+  let current_time = `${today.getHours()} : ${today.getMinutes()} : ${today.getSeconds()} , ${today.toDateString()}`;
   return current_time;
 }
 /*for(var i=0, len=localStorage.length; i<len; i++) {
