@@ -4,40 +4,40 @@ var div = document.getElementById("div");
 
 //load event
 window.addEventListener("load", function () {
-  new Interactions("load", "document", getTime());
+  new Interactions('Load', 'Window', getTime());
 });
 
 //unload event
 window.addEventListener("unload", function () {
-  new Interactions("unload", "document", getTime());
+  new Interactions('Unload','Window', getTime());
 });
 
 //Generate button event
-button.addEventListener("click", function (e) {
+button.addEventListener('click', function (e) {
   div.innerHTML = "";
-  if (input1.value < 1 || input1.value > 26) {
+  if (input1.value < 1 || input1.value > 26) {//check of number is valid
     alert("PLZ ENTER A VALID NUMBER");
     input1.value = "";
   } else {
     var value = input1.value;
     var list = randomUniqueNum(value);
     for (let i = 0; i < list.length; i++) {
-      var chr = String.fromCharCode(64 + list[i]);
-      div.innerHTML += `<button type = button id =${chr}>${chr}</button> `;
+      var chr = String.fromCharCode(64 + list[i]);//convert ASCII to Char
+      div.innerHTML += `<button type = button id =${chr}>${chr}</button> `;//create buttun
     }
-    new Interactions("click", "Generate", getTime());
+    new Interactions('Click', 'Generate', getTime());
   }
 });
 
 //Get pictures out for viewing
-div.addEventListener("click", function (e) {
+div.addEventListener('click', function (e) {
   document.getElementById("pic_div").innerHTML = "";
-  var cont = e.target.innerHTML.charCodeAt(0);
+  var cont = e.target.innerHTML.charCodeAt(0);//Get the character
   if (cont > 64 && cont < 91) {
     var img = document.createElement("img");
-    img.src = `Pics/${e.target.innerHTML}.jpg`;
+    img.src = `Pics/${e.target.innerHTML}.jpg`;//specify imageg source dynamically
     document.getElementById("pic_div").appendChild(img);
-    new Interactions("click", e.target.innerHTML, getTime());
+    new Interactions('Click', e.target.innerHTML, getTime());
   }
 });
 
@@ -45,13 +45,13 @@ div.addEventListener("click", function (e) {
 function randomUniqueNum(outputCount) {
   let arr = [];
   let range = 26;
-  for (let i = 1; i <= range; i++) {
+  for (let i = 1; i <= range; i++) {//create array from 1 - 26
     arr.push(i);
   }
 
   let result = [];
 
-  for (let i = 1; i <= outputCount; i++) {
+  for (let i = 1; i <= outputCount; i++) {//generate random numbers
     const random = Math.floor(Math.random() * (range - i));
     result.push(arr[random]);
     arr[random] = arr[range - i];
@@ -67,7 +67,7 @@ function Interactions(event_type, event_target, event_time) {
   this.event_time = event_time;
 
   this.display = function () {
-    return `${this.event_type} ${this.event_time}`;
+    return `${this.event_type} - ${this.event_time}`;
   };
   localStorage[this.display()] = this.event_target;
 }
