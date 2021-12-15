@@ -13,7 +13,7 @@ button.addEventListener("click", function (e) {
     for (let i = 0; i < list.length; i++) {
       var chr = String.fromCharCode(65 + list[i] - 1);
       div.innerHTML +=
-        "<button type = button id = " + chr + ">" + chr + "</button>" + " ";
+        `<button type = button id =${chr}>${chr}</button> `;
     }
   }
 });
@@ -22,7 +22,7 @@ div.addEventListener("click", function (e) {
   var cont = e.target.innerHTML.charCodeAt(0);
   if (cont > 64 && cont < 91) {
     var img = document.createElement("img");
-    img.src = "Pics/" + e.target.innerHTML + ".jpg";
+    img.src = `Pics/${e.target.innerHTML}.jpg`;
     document.getElementById("pic_div").appendChild(img);
   }
 });
