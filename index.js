@@ -2,6 +2,17 @@ var button = document.getElementById("generate");
 var input1 = document.getElementById("numberofletters");
 var div = document.getElementById("div");
 
+//load event
+window.addEventListener('load',function(){
+  new Interactions('load','load',getTime());
+});
+
+//unload event
+window.addEventListener('unload',function(){
+  new Interactions('unload','unload',getTime());
+});
+
+//Generate button event
 button.addEventListener("click", function (e) {
   div.innerHTML = "";
   if (input1.value < 1 || input1.value > 26) {
@@ -9,14 +20,17 @@ button.addEventListener("click", function (e) {
     input1.value = "";
   } else {
     var value = input1.value;
-    var list = randomUniqueNum(26, value);
+    var list = randomUniqueNum(value);
     for (let i = 0; i < list.length; i++) {
-      var chr = String.fromCharCode(65 + list[i] - 1);
+      var chr = String.fromCharCode(64 + list[i]);
       div.innerHTML +=
         `<button type = button id =${chr}>${chr}</button> `;
     }
+    new Interactions("click","Generate",getTime());
   }
 });
+
+//Get pictures out for viewing
 div.addEventListener("click", function (e) {
   document.getElementById("pic_div").innerHTML = "";
   var cont = e.target.innerHTML.charCodeAt(0);
@@ -24,11 +38,14 @@ div.addEventListener("click", function (e) {
     var img = document.createElement("img");
     img.src = `Pics/${e.target.innerHTML}.jpg`;
     document.getElementById("pic_div").appendChild(img);
+    new Interactions('click',e.target.innerHTML,getTime());
   }
 });
 
-function randomUniqueNum(range, outputCount) {
+//Generate random characters
+function randomUniqueNum(outputCount) {
   let arr = [];
+  let range = 26;
   for (let i = 1; i <= range; i++) {
     arr.push(i);
   }
@@ -43,3 +60,29 @@ function randomUniqueNum(range, outputCount) {
 
   return result;
 }
+
+//Store interactions in Localstorage
+function Interactions(event_type,event_target,event_time){
+  this.event_type = event_type;
+  this.event_target=event_target;
+  this.event_time=event_time;
+  
+  this.display=function(){
+    return `${this.event_type} ${this.event_time}`;
+  }
+  localStorage[this.display()]=this.event_target;
+}
+
+//Get time function
+function getTime(){
+  var today =new Date();
+  let current_time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+  return current_time;
+}
+/*for(var i=0, len=localStorage.length; i<len; i++) {
+    var key = localStorage.key(i);
+    var value = localStorage[key];
+    if(value.equals(desired_value))
+    console.log(key + " => " + value);
+}
+*/
