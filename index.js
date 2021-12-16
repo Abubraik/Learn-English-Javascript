@@ -1,6 +1,10 @@
 var button = document.getElementById("generate");
 var input1 = document.getElementById("numberofletters");
 var div = document.getElementById("div");
+var pic_div = document.getElementById("pic_div");
+document.getElementsByTagName("body")[0].style.margin="5px";
+div.style.margin="5px";
+pic_div.style.margin="7px";
 
 //load event
 window.addEventListener("load", function () {
@@ -19,11 +23,12 @@ button.addEventListener('click', function (e) {
     alert("PLZ ENTER A VALID NUMBER");
     input1.value = "";
   } else {
+    pic_div.innerHTML="";
     var value = input1.value;
     var list = randomUniqueNum(value);
     for (let i = 0; i < list.length; i++) {
       var chr = String.fromCharCode(64 + list[i]);//convert ASCII to Char
-      div.innerHTML += `<button type = button id =${chr}>${chr}</button> `;//create buttun
+      div.innerHTML += `<button type = button id =${chr}>${chr}</button> `;//create button
     }
     new Interactions('Click', 'Generate', getTime());
   }
@@ -31,12 +36,12 @@ button.addEventListener('click', function (e) {
 
 //Get pictures out for viewing
 div.addEventListener('click', function (e) {
-  document.getElementById("pic_div").innerHTML = "";
+  pic_div.innerHTML = "";
   var cont = e.target.innerHTML.charCodeAt(0);//Get the character
   if (cont > 64 && cont < 91) {
     var img = document.createElement("img");
     img.src = `Pics/${e.target.innerHTML}.jpg`;//specify imageg source dynamically
-    document.getElementById("pic_div").appendChild(img);
+    pic_div.appendChild(img);
     new Interactions('Click', e.target.innerHTML, getTime());
   }
 });
