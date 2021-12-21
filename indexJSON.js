@@ -5,15 +5,15 @@ var div = document.getElementById("div");
 //load event
 window.addEventListener("load", function () {
   localStorage[
-    JSON.stringify(new Interactions("load", "Window", getTime()).display())
-  ] = "Window";
+    JSON.stringify(new Interactions("load", "document", getTime()).display())
+  ] = "document";
 });
 
 //unload event
 window.addEventListener("unload", function () {
   localStorage[
-    JSON.stringify(new Interactions("unload", "Window", getTime()).display())
-  ] = "Window";
+    JSON.stringify(new Interactions("unload", "document", getTime()).display())
+  ] = "document";
 });
 
 //Generate button event
