@@ -16,12 +16,24 @@ window.addEventListener("unload", function () {
   ] = "document";
 });
 
+
+var grep =0; for(let i = 0 ;i<=localStorage.length;i++){
+  var temp = localStorage.key(i);
+  var curr = "Generate ";
+  if(temp){
+    if(temp.includes(curr))
+    grep = grep +1;
+    }
+}
+
 //Generate button event
 button.addEventListener("click", function (e) {
   div.innerHTML = "";
   if (input1.value < 1 || input1.value > 26) {
     alert("PLZ ENTER A VALID NUMBER");
     input1.value = "";
+    document.getElementById("pic_div").innerHTML="";
+
   } else {
     let value = input1.value;
     let list = randomUniqueNum(value);
@@ -29,9 +41,8 @@ button.addEventListener("click", function (e) {
       let chr = String.fromCharCode(64 + list[i]);
       div.innerHTML += `<button type = button id =${chr}>${chr}</button> `;
     }
-    localStorage[
-      JSON.stringify(new Interactions("click", "Generate", getTime()).display())
-    ] = "Generate";
+  localStorage["Generate " + grep++
+   ] =JSON.stringify( new Interactions("click", "Generate", getTime()).display());
   }
 });
 //Get pictures out for viewing
@@ -76,7 +87,7 @@ function Interactions(event_type, event_target, event_time) {
   this.event_time = event_time;
 
   this.display = function () {
-    return `${this.event_type} ${this.event_time}`;
+    return `${this.event_type} , ${this.event_time}`;
   };
 }
 //Get time function
